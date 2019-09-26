@@ -1,1 +1,2 @@
-web_docroot:true
+  api_version: 1
+  web_docroot: true
