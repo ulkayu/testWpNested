@@ -7,6 +7,7 @@
  *
  * https://pantheon.io/docs
  */
+
 /**
  * Local configuration information.
  *
@@ -17,6 +18,7 @@
 if (file_exists(dirname(__FILE__) . '/wp-config-local.php') && !isset($_ENV['PANTHEON_ENVIRONMENT'])):
   # IMPORTANT: ensure your local config does not include wp-settings.php
   require_once(dirname(__FILE__) . '/wp-config-local.php');
+
 /**
  * Pantheon platform settings. Everything you need should already be set.
  */
@@ -25,16 +27,22 @@ else:
     // ** MySQL settings - included in the Pantheon Environment ** //
     /** The name of the database for WordPress */
     define('DB_NAME', $_ENV['DB_NAME']);
+
     /** MySQL database username */
     define('DB_USER', $_ENV['DB_USER']);
+
     /** MySQL database password */
     define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
+
     /** MySQL hostname; on Pantheon this includes a specific port number. */
     define('DB_HOST', $_ENV['DB_HOST'] . ':' . $_ENV['DB_PORT']);
+
     /** Database Charset to use in creating database tables. */
     define('DB_CHARSET', 'utf8');
+
     /** The Database Collate type. Don't change this if in doubt. */
     define('DB_COLLATE', '');
+
     /**#@+
      * Authentication Unique Keys and Salts.
      *
@@ -56,6 +64,7 @@ else:
     define('LOGGED_IN_SALT',   $_ENV['LOGGED_IN_SALT']);
     define('NONCE_SALT',       $_ENV['NONCE_SALT']);
     /**#@-*/
+
     /** A couple extra tweaks to help things run well on Pantheon. **/
     if (isset($_SERVER['HTTP_HOST'])) {
         // HTTP is still the default scheme for now. 
@@ -74,10 +83,12 @@ else:
     error_reporting(E_ALL ^ E_DEPRECATED);
     /** Define appropriate location for default tmp directory on Pantheon */
     define('WP_TEMP_DIR', $_SERVER['HOME'] .'/tmp');
+
     // FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI
     if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' ) ) && ! defined( 'DISALLOW_FILE_MODS' ) ) :
         define( 'DISALLOW_FILE_MODS', true );
     endif;
+
   else:
     /**
      * This block will be executed if you have NO wp-config-local.php and you
@@ -101,7 +112,9 @@ else:
     define('NONCE_SALT',       'put your unique phrase here');
   endif;
 endif;
+
 /** Standard wp-config.php stuff from here on down. **/
+
 /**
  * WordPress Database Table prefix.
  *
@@ -109,6 +122,7 @@ endif;
  * prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
+
 /**
  * WordPress Localized Language, defaults to English.
  *
@@ -118,6 +132,7 @@ $table_prefix = 'wp_';
  * language support.
  */
 define('WPLANG', '');
+
 /**
  * For developers: WordPress debugging mode.
  *
@@ -131,9 +146,15 @@ define('WPLANG', '');
 if ( ! defined( 'WP_DEBUG' ) ) {
     define('WP_DEBUG', false);
 }
+
 /* That's all, stop editing! Happy Pressing. */
+
+
+
+
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
-  define('ABSPATH', dirname(__FILE__) . '/');
+	define('ABSPATH', dirname(__FILE__) . '/');
+
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
